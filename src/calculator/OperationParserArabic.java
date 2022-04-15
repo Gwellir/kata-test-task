@@ -12,7 +12,7 @@ public class OperationParserArabic extends OperationParser {
     }
 
     @Override
-    protected int parseNum(String numAsString) {
+    protected int parseNum(String numAsString) throws NumberFormatException {
         return Integer.parseInt(numAsString);
     }
 }

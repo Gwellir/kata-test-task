@@ -9,11 +9,11 @@ public abstract class OperationParser {
         int num2 = this.parseNum(numAsString2);
         Operand operand = this.parseOperand(opAsString);
         this.operation = new Operation(num1, num2, operand);
-    };
+    }
 
-    public abstract String compute();
+    public abstract String compute() throws Exception;
 
-    protected abstract int parseNum(String numAsString);
+    protected abstract int parseNum(String numAsString) throws Exception;
 
     protected Operand parseOperand(String opString) throws Exception {
         return switch (opString) {

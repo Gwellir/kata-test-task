@@ -1,6 +1,6 @@
-import calculator.Operation;
 import calculator.OperationParser;
 import calculator.OperationParserArabic;
+import calculator.OperationParserRoman;
 
 import java.util.Scanner;
 
@@ -8,12 +8,12 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String result = "";
+        String result;
         while (true) {
             System.out.println("Введите новую операцию: ");
             String opLine = input.nextLine();
             try {
-                result = calc(opLine);
+                result = calc(opLine.toUpperCase());
             } catch (Exception e) {
                 e.printStackTrace();
                 break;
@@ -32,10 +32,10 @@ public class Main {
         OperationParser parser;
 
         if ("0123456789".indexOf(input.charAt(0)) >= 0)
-            parser = new OperationParserArabic(segments[0],  segments[2], segments[1]);
-//        else if ("IXV".indexOf(input.charAt(0)) >= 0) {}
-        else
-            throw new Exception("Wrong number format");
+            parser = new OperationParserArabic(segments[0], segments[2], segments[1]);
+        else if ("IXV".indexOf(input.charAt(0)) >= 0)
+            parser = new OperationParserRoman(segments[0], segments[2], segments[1]);
+        else throw new Exception("Wrong number format");
 
         return parser.compute();
     }
