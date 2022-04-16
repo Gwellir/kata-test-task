@@ -6,7 +6,7 @@ public class OperationParserArabic extends OperationParser {
     }
 
     @Override
-    public String getResult() throws CalcException {
+    public String getResult() {
         int result = this.operation.compute();
         return String.valueOf(result);
     }
@@ -16,7 +16,7 @@ public class OperationParserArabic extends OperationParser {
         try {
             return Integer.parseInt(numAsString);
         } catch (NumberFormatException e) {
-            throw new CalcException(String.format("%s is not an Arabic numeral", numAsString));
+            throw new CalcException(String.format("'%s' is not an Arabic numeral", numAsString));
         }
     }
 }

@@ -6,7 +6,7 @@ public class Operation {
     private final Operand operand;
     private int result;
 
-    private int minValue = 0;
+    private int minValue = 1;
     private int maxValue = 10;
 
     public Operation(int num1, int num2, Operand operand) throws CalcException {
@@ -29,20 +29,15 @@ public class Operation {
 
     private void checkValue(int num) throws CalcException {
         if (num < this.minValue || num > this.maxValue)
-            throw new CalcException("An argument is out of range!");
+            throw new CalcException(String.format("An argument '%s' is out of range!", num));
     }
 
-    public int compute() throws CalcException {
+    public int compute() {
         switch (this.operand) {
             case ADD -> result = num1 + num2;
             case SUB -> result = num1 - num2;
             case MUL -> result = num1 * num2;
-            case DIV -> {
-                    if (num2 == 0)
-                        throw new CalcException("Trying to divide by zero");
-                    result = num1 / num2;
-            }
-
+            case DIV -> result = num1 / num2;
         }
         return this.result;
     }

@@ -20,7 +20,9 @@ public abstract class OperationParser {
             case "-" -> Operand.SUB;
             case "*" -> Operand.MUL;
             case "/" -> Operand.DIV;
-            default -> throw new CalcException("Wrong operand!");
+            default -> throw new CalcException(
+                    String.format("Wrong operand: '%s'!", opString)
+            );
         };
     }
 }

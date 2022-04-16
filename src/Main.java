@@ -15,12 +15,12 @@ public class Main {
             String opLine = input.nextLine();
             try {
                 result = calc(opLine.toUpperCase());
+                System.out.println("Operation output: ");
+                System.out.println(result);
             } catch (CalcException e) {
                 e.printStackTrace();
                 break;
             }
-            System.out.println("Operation output: ");
-            System.out.println(result);
         }
     }
 
