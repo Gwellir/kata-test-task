@@ -32,25 +32,31 @@ public class RomanNumeral {
 
     public RomanNumeral() {}
 
-    public static int toArabic(String numAsString) throws Exception {
+    public static int toArabic(String numAsString) throws CalcException {
+        String romanNumeral = numAsString;
         int i = 0;
         int num = 0;
-        while (numAsString.length() > 0 && i < baseSymbols.length) {
-            if (numAsString.startsWith(baseSymbols[i].name)) {
+        while (romanNumeral.length() > 0 && i < baseSymbols.length) {
+            if (romanNumeral.startsWith(baseSymbols[i].name)) {
                 num += baseSymbols[i].value;
-                numAsString = numAsString.substring(baseSymbols[i].name.length());
+                romanNumeral = romanNumeral.substring(baseSymbols[i].name.length());
             } else {
                 i++;
             }
         }
 
         if (num == 0)
-            throw new Exception("Input string was not a Roman numeral");
+            throw new CalcException(
+                    String.format("'%s' is not a valid Roman numeral!", numAsString)
+            );
 
         return num;
     }
 
-    public static String toRoman(int num) throws Exception {
+    public static String toRoman(int num) throws CalcException {
+        if (num <= 0)
+            throw new CalcException("Cannot display a non-positive result as Roman numeral!");
+
         int i = 0;
         StringBuilder sb = new StringBuilder();
         while (num > 0) {
@@ -61,9 +67,7 @@ public class RomanNumeral {
                 i++;
             }
         }
-        String numAsString = sb.toString();
-        if (numAsString.length() == 0)
-            throw new Exception("Roman numbers cannot be lower than 1");
+
         return sb.toString();
     }
 }

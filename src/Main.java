@@ -1,3 +1,4 @@
+import calculator.CalcException;
 import calculator.OperationParser;
 import calculator.OperationParserArabic;
 import calculator.OperationParserRoman;
@@ -10,34 +11,35 @@ public class Main {
         Scanner input = new Scanner(System.in);
         String result;
         while (true) {
-            System.out.println("Введите новую операцию: ");
+            System.out.println("Input a new operation: ");
             String opLine = input.nextLine();
             try {
                 result = calc(opLine.toUpperCase());
-            } catch (Exception e) {
+            } catch (CalcException e) {
                 e.printStackTrace();
                 break;
             }
+            System.out.println("Operation output: ");
             System.out.println(result);
         }
     }
 
-    public static String calc(String input) throws Exception {
+    public static String calc(String input) throws CalcException {
         String[] segments = input.trim().split("\\s+");
+
         if (segments.length != 3) {
-            System.out.println("Wrong input");
-            return "ERROR";
+            throw new CalcException("Need exactly 3 arguments!");
         }
 
         OperationParser parser;
 
-        if ("0123456789".indexOf(input.charAt(0)) >= 0)
+        if (Character.isDigit(input.charAt(0)))
             parser = new OperationParserArabic(segments[0], segments[2], segments[1]);
         else if ("IXV".indexOf(input.charAt(0)) >= 0)
             parser = new OperationParserRoman(segments[0], segments[2], segments[1]);
-        else throw new Exception("Wrong number format");
+        else throw new CalcException("Numbers are neither Arabic nor Roman!");
 
-        return parser.compute();
+        return parser.getResult();
     }
 
 }

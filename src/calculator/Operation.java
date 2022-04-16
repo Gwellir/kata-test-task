@@ -9,7 +9,7 @@ public class Operation {
     private int minValue = 0;
     private int maxValue = 10;
 
-    public Operation(int num1, int num2, Operand operand) throws Exception {
+    public Operation(int num1, int num2, Operand operand) throws CalcException {
         checkValue(num1);
         checkValue(num2);
 
@@ -27,17 +27,22 @@ public class Operation {
         this.maxValue = maxValue;
     }
 
-    private void checkValue(int num) throws Exception {
+    private void checkValue(int num) throws CalcException {
         if (num < this.minValue || num > this.maxValue)
-            throw new Exception("An argument is out of range!");
+            throw new CalcException("An argument is out of range!");
     }
 
-    public int getResult() throws ArithmeticException {
+    public int compute() throws CalcException {
         switch (this.operand) {
             case ADD -> result = num1 + num2;
             case SUB -> result = num1 - num2;
             case MUL -> result = num1 * num2;
-            case DIV -> result = num1 / num2;
+            case DIV -> {
+                    if (num2 == 0)
+                        throw new CalcException("Trying to divide by zero");
+                    result = num1 / num2;
+            }
+
         }
         return this.result;
     }
