@@ -6,10 +6,10 @@ public class Operation {
     private final Operand operand;
     private int result;
 
-    private int minValue = 0;
+    private int minValue = 1;
     private int maxValue = 10;
 
-    public Operation(int num1, int num2, Operand operand) throws Exception {
+    public Operation(int num1, int num2, Operand operand) throws CalcException {
         checkValue(num1);
         checkValue(num2);
 
@@ -27,12 +27,12 @@ public class Operation {
         this.maxValue = maxValue;
     }
 
-    private void checkValue(int num) throws Exception {
+    private void checkValue(int num) throws CalcException {
         if (num < this.minValue || num > this.maxValue)
-            throw new Exception("An argument is out of range!");
+            throw new CalcException(String.format("An argument '%s' is out of range!", num));
     }
 
-    public int getResult() throws ArithmeticException {
+    public int compute() {
         switch (this.operand) {
             case ADD -> result = num1 + num2;
             case SUB -> result = num1 - num2;
