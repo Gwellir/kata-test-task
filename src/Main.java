@@ -10,18 +10,20 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String result;
-        while (true) {
+        boolean inputIsValid;
+        do {
             System.out.println("Input a new operation: ");
             String opLine = input.nextLine();
             try {
                 result = calc(opLine.toUpperCase());
+                inputIsValid = true;
                 System.out.println("Operation output: ");
                 System.out.println(result);
             } catch (CalcException e) {
                 e.printStackTrace();
-                break;
+                inputIsValid = false;
             }
-        }
+        } while (inputIsValid);
     }
 
     public static String calc(String input) throws CalcException {
