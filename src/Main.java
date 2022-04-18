@@ -37,7 +37,7 @@ public class Main {
 
         if (Character.isDigit(input.charAt(0)))
             parser = new OperationParserArabic(segments[0], segments[2], segments[1]);
-        else if ("IXV".indexOf(input.charAt(0)) >= 0)
+        else if ("IVXLCDM".indexOf(input.charAt(0)) >= 0)
             parser = new OperationParserRoman(segments[0], segments[2], segments[1]);
         else throw new CalcException("Numbers are neither Arabic nor Roman!");
 
